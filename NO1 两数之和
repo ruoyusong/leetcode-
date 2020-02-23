@@ -2,7 +2,7 @@
  * Note: The returned array must be malloced, assume caller calls free().
  */
 int* twoSum(int* nums, int numsSize, int target,int* returnSize){
-  static int finalNum[2]; 
+  static int finalNum[2]; //int* finalNum=(int*)malloc(sizeof(int)*2);
 for(int i=0;i<numsSize-1;i++){
     for(int j=i+1;j<numsSize;j++){
         if((nums[i]+nums[j])==target){
@@ -15,3 +15,12 @@ for(int i=0;i<numsSize-1;i++){
 }
 return 0;
 }
+
+/*
+2已解决，1待解决
+解决1：为什么使用int* twoSum,int* nums
+两种数组定义方式，int* 方式必须为指针开设空间(如提示），这样指针array与数组array[10]具有相同的功能
+解决2：使用另一种方式定义数组时必须加static int finalNum[2];
+如果不用静态的话，数组的生命周期就是从定义的地方到函数结束，函数运行结束，这个内存也就释放掉了。返回的是数组的首地址，一旦函数运行结束，这个地址里的东西就变成空了，所以要用静态数组延长数组的生命周期。
+待解决2：不为*returnSize赋值会编译出错
+*/
